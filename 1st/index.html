@@ -1,0 +1,160 @@
+<html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <title>1st</title>
+        <link type="text/css" rel="stylesheet" href="assets/css/show.css" />
+        <link type="text/css" rel="stylesheet" href="assets/css/prettify.css" />
+        <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+        <script type="text/javascript" src="assets/js/show.js"></script>
+        <script type="text/javascript" src="assets/js/prettify/prettify.js"></script>
+        <script type="text/javascript" src="assets/js/prettify/lang-apollo.js"></script><script type="text/javascript" src="assets/js/prettify/lang-css.js"></script><script type="text/javascript" src="assets/js/prettify/lang-hs.js"></script><script type="text/javascript" src="assets/js/prettify/lang-lisp.js"></script><script type="text/javascript" src="assets/js/prettify/lang-lua.js"></script><script type="text/javascript" src="assets/js/prettify/lang-ml.js"></script><script type="text/javascript" src="assets/js/prettify/lang-proto.js"></script><script type="text/javascript" src="assets/js/prettify/lang-scala.js"></script><script type="text/javascript" src="assets/js/prettify/lang-sql.js"></script><script type="text/javascript" src="assets/js/prettify/lang-sql.js"></script><script type="text/javascript" src="assets/js/prettify/lang-vb.js"></script><script type="text/javascript" src="assets/js/prettify/lang-vhdl.js"></script><script type="text/javascript" src="assets/js/prettify/lang-wiki.js"></script><script type="text/javascript" src="assets/js/prettify/lang-yaml.js"></script><link type="text/css" rel="stylesheet" href="css/custom.css?1396113847707" />
+      <script type="text/javascript"><!--
+        window.onload=function() { prettyPrint(); };
+      --></script>
+      </head>
+      <body>
+        <div id="slides">
+          <div id="reel">
+            <div class="content" id="slide-0"><div class="container">
+                  <h1 id="Git%E3%81%A8SVN%E3%81%AE%E5%90%8C%E6%99%82%E9%81%8B%E7%94%A8">GitとSVNの同時運用</h1><h2 id=""><a  href="https://twitter.com/numa08">@numa08</a></h2>
+                </div>
+      </div><div class="content" id="slide-1"><div class="container">
+                  <h2 id="%E8%87%AA%E5%B7%B1%E7%B4%B9%E4%BB%8B">自己紹介</h2><p> <img alt=""  src="hello/icon.jpeg" />
+</p><ul><li><a  href="https://twitter.com/numa08">@numa08</a>
+</li><li>人間git-svn
+</li><li>アイコンかわいいガチ勢
+</li></ul>
+                </div>
+      </div><div class="content" id="slide-2"><div class="container">
+                  <h2 id="%E4%BB%8A%E6%97%A5%E8%A9%B1%E3%81%99%E3%81%93%E3%81%A8">今日話すこと</h2><ul><li>GitとSubversionが共存する環境下で
+</li><li>両方を同時に運用し
+</li><li>リポジトリをぶっ壊さない方法
+</li></ul>
+                </div>
+      </div><div class="content" id="slide-3"><div class="container">
+                  <h2 id="%E7%92%B0%E5%A2%83">環境</h2><ul><li><p>Subversion
+</p><ul><li>社外
+</li><li>コミット権保持者が限られてる
+</li><li>standartな構成ではない
+</li></ul></li></ul>
+                </div>
+      </div><div class="content" id="slide-4"><div class="container">
+                  <h2 id="%E7%92%B0%E5%A2%83">環境</h2><ul><li><p>Git
+</p><ul><li>社内
+</li><li>Gitlab使ってます
+</li><li>master以外は誰でもコミットできる
+</li><li>git-flowは使ってないよ
+</li></ul></li></ul>
+                </div>
+      </div><div class="content" id="slide-5"><div class="container">
+                  <h2 id="%E8%A6%81%E6%B1%82">要求</h2><ul><li>SubversionのコードをGitに移動
+</li><li>開発はGitのトピックブランチで開発
+</li><li>プルリク後にmasterにマージ
+</li><li>マージ後Subversionにもcommit
+</li></ul>
+                </div>
+      </div><div class="content" id="slide-6"><div class="container">
+                  <h2 id="%E7%99%BB%E5%A0%B4%E4%BA%BA%E7%89%A9">登場人物</h2><ul><li><p>開発者
+</p><ul><li>実装とかする
+</li><li>Subversionへのコミット権は無い
+</li><li>Gitのmasterへプッシュ権は無い
+</li></ul></li></ul>
+                </div>
+      </div><div class="content" id="slide-7"><div class="container">
+                  <h2 id="%E7%99%BB%E5%A0%B4%E4%BA%BA%E7%89%A9">登場人物</h2><ul><li><p>管理者
+</p><ul><li>実装とかする
+</li><li>Subversionへのコミット権がある
+</li><li>Gitのmasterへのプッシュ権がある
+</li></ul></li></ul>
+                </div>
+      </div><div class="content" id="slide-8"><div class="container">
+                  <h2 id="Subversion%E3%81%8B%E3%82%89Git%E3%81%AB%E7%A7%BB%E5%8B%95">SubversionからGitに移動</h2><pre><code class="prettyprint lang-bash">git svn cloen ${SVN_URL} --trunck=${trunk} \
+--tags=${tags} --braches=${branche1} \
+--branches=${branche2} ${dir}
+cd ${dir}
+git remote add origin ${GIT_URL}
+git push origin master
+</code></pre>
+                </div>
+      </div><div class="content" id="slide-9"><div class="container">
+                  <h2 id="Subversion%E3%81%8B%E3%82%89Git%E3%81%AB%E7%A7%BB%E5%8B%95">SubversionからGitに移動</h2><ul><li>git-svnで可能
+</li><li>オプションの指定でブランチやタグが散らばっててもなんとかなる
+</li><li>URLに日本語がある場合は、パーセントエンコード
+</li><li><p>でかいリポジトリだと時間がかかる
+</p><ul><li>指定のリビジョン以降取得とかも検討
+</li></ul></li></ul>
+                </div>
+      </div><div class="content" id="slide-10"><div class="container">
+                  <h2 id="%E9%96%8B%E7%99%BA%E8%80%85%E3%81%8C%E5%A2%97%E3%81%88%E3%81%9F%E3%82%88">開発者が増えたよ</h2><pre><code class="prettyprint lang-bash">git clone ${GIT_URL} ${dir}
+cd ${dir}
+git checkout -b ${branch}
+git commit
+git commit
+...
+git push origin ${branch}
+</code></pre>
+                </div>
+      </div><div class="content" id="slide-11"><div class="container">
+                  <h2 id="%E9%96%8B%E7%99%BA%E8%80%85%E3%81%8C%E5%A2%97%E3%81%88%E3%81%9F%E3%82%88">開発者が増えたよ</h2><ul><li>コミットやプッシュは普通に行える
+</li><li>ブランチ名はissueベースで命名してます
+</li><li>Gitlabでマージリクエスト、コードレビュー、マージを行います</li></ul>
+                </div>
+      </div><div class="content" id="slide-12"><div class="container">
+                  <h2 id="svn%E3%81%AB%E3%82%B3%E3%83%9F%E3%83%83%E3%83%88%E3%81%99%E3%82%8B">svnにコミットする</h2><pre><code class="prettyprint lang-bash">git pull origin master
+git svn dcommit
+git push -f origin master
+</code></pre>
+                </div>
+      </div><div class="content" id="slide-13"><div class="container">
+                  <h2 id="svn%E3%81%AB%E3%82%B3%E3%83%9F%E3%83%83%E3%83%88%E3%82%92%E3%81%99%E3%82%8B">svnにコミットをする</h2><ul><li><code>git svn dcommit</code>をすると、svnに行ったコミットのハッシュが変わる
+</li><li><code>-f</code>をつけてpushを行い、リポジトリを更新する
+</li></ul>
+                </div>
+      </div><div class="content" id="slide-14"><div class="container">
+                  <h2 id="svn%E3%81%AB%E3%82%B3%E3%83%9F%E3%83%83%E3%83%88%E3%82%92%E3%81%99%E3%82%8B">svnにコミットをする</h2><ul><li><p>submoduleを利用してはいけない
+</p><ul><li>dcommitできない
+</li></ul></li><li><p><code>git mv</code>したログがあるとクラッシュすることがある
+</p><ul><li>再現方法不明
+</li><li>“タマに起きる“としか・・・ 
+</li></ul></li></ul>
+                </div>
+      </div><div class="content" id="slide-15"><div class="container">
+                  <h2 id="%E7%AE%A1%E7%90%86%E8%80%85%E3%81%8C%E5%A2%97%E3%81%88%E3%81%9F%E3%82%88">管理者が増えたよ</h2><pre><code class="prettyprint lang-bash">git cloen ${GIT_URL} ${dir}
+cd ${dir}
+git svn init ${SVN_URL} --trunck=${trunk} \
+--tags=${tags} --braches=${branche1} \
+--branches=${branche2}
+git log --pretty=format:&quot;%H&quot; -1 &gt; .git/refs/remotes/trunk
+git svn fetch
+</code></pre>
+                </div>
+      </div><div class="content" id="slide-16"><div class="container">
+                  <h2 id="%E7%AE%A1%E7%90%86%E8%80%85%E3%81%8C%E5%A2%97%E3%81%88%E3%81%9F%E3%82%88">管理者が増えたよ</h2><ul><li><code>git svn fetch</code>でsvnのコミットを取得できる
+</li><li>生成されるハッシュはgitのコミットとは対応していない
+</li><li><code>.git/refs/remotes/trunk</code>にtrunkのHEADに対応するコミットのハッシュを記入する
+</li></ul>
+                </div>
+      </div><div class="content" id="slide-17"><div class="container">
+                  <h2 id="%E3%81%A9%E3%81%86%E3%81%97%E3%81%A6%E3%81%93%E3%81%86%E3%81%AA%E3%81%A3%E3%81%9F">どうしてこうなった</h2><ul><li>政治的なアレとしか・・・
+</li><li>gitに移動するっぽい流れはある
+</li></ul>
+                </div>
+      </div><div class="content" id="slide-18"><div class="container">
+                  <h2 id="tips%2C%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85%E3%81%AA%E3%81%A9">tips,注意事項など</h2><ul><li><p>masterへのマージは<code>--no-ff</code>で
+</p><ul><li>svn的にはブランチは無視される
+</li><li>git的にはブランチ情報が残る
+</li></ul></li><li>masterの歴史の書き換えはしない
+</li><li><code>git svn dcommit</code>,<code>git push -f</code>を一緒にやるサブコマンドを作ろうと思う
+</li><li>名前募集
+</li></ul>
+                </div>
+      </div><div class="content" id="slide-19"><div class="container">
+                  <h2 id="%E3%81%BE%E3%81%A8%E3%82%81">まとめ</h2><p><a  href="http://git-scm.com/book/ja/Git%E3%81%A8%E3%81%9D%E3%81%AE%E4%BB%96%E3%81%AE%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E9%80%A3%E6%90%BA-Git-%E3%81%A8-Subversion">git-scm.orgより</a>
+</p><p><img alt=""  src="hello/matome.png" /></p>
+                </div>
+      </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="js/custom.js?1396113848220"></script>
+      </body>
+    </html>
