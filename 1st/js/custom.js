@@ -50,7 +50,7 @@ $(function(){
 		}));
 		var eventTitle = $("<a>", {
 			"class" : "topbar_link right",
-			text : "vcs運用&Tips勉強会",
+			text : "【svn/git/hg】バージョン管理システム 運用&Tips勉強会",
 			href : "http://connpass.com/event/5412/"
 		});
 		var topbar = $("<div>", {
