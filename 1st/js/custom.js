@@ -26,7 +26,7 @@ $(function(){
 			"class" : "logo"
 		}))
 		.append($("<a>", {
-			"href" : "https://twitter.com/search?q=%23real_dvcs",
+			"href" : "https://twitter.com/intent/tweet?text=Git%20With%20SVN&hashtags=real_dvcs&url=" + encodeURIComponent(window.location.origin  +window.location.pathname),
 			"text" : "#read_dvcs"
 		}))
 		);
@@ -50,7 +50,7 @@ $(function(){
 		}));
 		var eventTitle = $("<a>", {
 			"class" : "topbar_link right",
-			text : "vcc運用&Tips勉強会",
+			text : "vcs運用&Tips勉強会",
 			href : "http://connpass.com/event/5412/"
 		});
 		var topbar = $("<div>", {
